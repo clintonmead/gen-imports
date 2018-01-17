@@ -3,8 +3,6 @@
 
 module Distribution.Hackage.Imports.Generate where
 
-import Data.ByteString (ByteString)
-
 import Distribution.Hackage.DB (Hackage, Version, readHackage)
 import Distribution.PackageDescription (
   GenericPackageDescription(packageDescription, condLibrary),
@@ -27,7 +25,6 @@ import Data.String (fromString)
 import Data.Char (toUpper)
 import Data.Foldable (traverse_)
 import Data.List (intercalate)
-import Debug.Trace (traceShowId)
 
 type PackageName = String
 
@@ -61,7 +58,7 @@ genImportList f moduleName packageName l = languageCpp $+$ moduleHeader $+$ guar
   languageCpp = "{-# LANGUAGE CPP #-}"
   guard = "#ifdef MIN_VERSION_" <> packageNameDoc
   packageNameDoc = text (replace_dash <$> toString packageName)
-  moduleHeader = "module " <> disp moduleName <> " where"
+  moduleHeader = "module " <> disp moduleName <> " () where"
   endIf = case l of
     [] -> mempty
     _ -> "#endif"

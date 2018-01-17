@@ -1,5 +1,5 @@
 name:                gen-imports
-version:             0.1.0.0
+version:             0.1.0.1
 synopsis:            Code to generate instances for the package "ghc-instances"
 description:
   Functions in this package look at the hackage database to get all the public modules of packages.
